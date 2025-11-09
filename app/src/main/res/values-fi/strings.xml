@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">Rutiiniseuranta</string>
+
+    <string name="tasks">Tehtävät</string>
+    <string name="habits">Rutiinit</string>
+    <string name="habit">Rutiini</string>
+    <string name="settings">Asetukset</string>
+    <string name="statistics">Tilastot</string>
+
+    <!--Generic-->
+    <string name="save_changes">Tallenna muutokset</string>
+    <string name="create">Luo</string>
+    <string name="delete">Poista</string>
+    <string name="cancel">Peruuta</string>
+    <string name="deleted">%1$s poistettu</string>
+
+    <!--Habits-->
+    <string name="create_habit">Luo rutiini</string>
+    <string name="edit_habit">Muokkaa rutiinia</string>
+    <string name="delete_habit">Poista rutiini</string>
+
+    <string name="error_name_empty">Rutiinin nimi ei voi olla tyhjä</string>
+    <string name="habit_delete_confirmation">Oletko varma? Tätä toimenpidettä ei voida peruuttaa.</string>
+
+    <string name="no_habits_message">Et ole lisännyt vielä rutiineja\n\nVoit lisätä uuden rutiinin painamalla + painiketta</string>
+
+    <string name="habit_name">Nimi</string>
+    <string name="habit_repeat">Toista</string>
+    <string name="habit_repeat_days">Toista: Joka %1$s</string>
+    <string name="habit_repeat_every_day">Toista: Joka päivä</string>
+    <string name="and">ja</string>
+    <string name="daily">Joka päivä</string>
+    <string name="repeat_every">Joka %1$s</string>
+
+    <string name="habit_priority">Rutiini </string>
+    <string name="habit_priority_header">Prioriteetti: %1$s</string>
+
+    <string name="habit_icon">Kuvake</string>
+
+    <string name="score_content_description">Rutiinin pisteet: +%1$d</string>
+    <string name="total_completed_content_description">Tehtäviä suoritettu yhteensä: %1$d</string>
+
+    <string name="task_already_marked">Tehtäväloki on jo lisätty valitulle päivälle</string>
+    <string name="task_log_added">Tehtäväloki lisätty</string>
+    <string name="disable_tasks_switch_content_description">Kytke tehtävät päälle</string>
+    <string name="tasks_disabled">Tehtävät pois päältä</string>
+    <string name="tasks_enabled">Tehtävät päällä</string>
+
+    <!--Task management-->
+    <string name="task_logs">Tehtävälokit</string>
+    <string name="view_task_logs">Katso tehtävälokit</string>
+    <string name="add_task_log">Lisää uusi tehtäväloki</string>
+    <string name="for_date">Päivälle: %1$s</string>
+
+    <!--Statistics-->
+    <string name="created">Luotu</string>
+    <string name="total_success">Tehtäviä suoritettu</string>
+    <string name="highest_score">Suurin pistesarja</string>
+    <string name="stat_habits">Rutiinit</string>
+    <string name="stat_average_task_success_per_day">Suoritetut tehtävät per päivä keskiarvo</string>
+    <string name="stat_task_success_per_day">Suoritetut tehtävät per päivä</string>
+    <string name="stat_task_scheduled_per_weekday">Ajoitetut tehtävät per viikonpäivä</string>
+    <string name="select_date_content_description">Valitse päivä</string>
+    <string name="select_columns_content_description">Valitse näkymä</string>
+
+    <string name="columns_week">Viikko</string>
+    <string name="columns_two_weeks">Kaksi viikkoa</string>
+    <string name="columns_month">Kuukausi</string>
+
+    <!--Tasks-->
+    <string name="task_set_success">Merkitse tehtävä suoritetuksi</string>
+    <string name="task_set_failed">Merkitse tehtävä epäonnistuneeksi</string>
+    <string name="task_set_skip">Ohita tehtävä</string>
+    <string name="task_done">Valmis!</string>
+    <string name="task_failed">Epäonnistunut</string>
+    <string name="task_skipped">Ohita</string>
+
+    <string name="task_set_success_content_description">Merkitse tehtävä suoritetuksi: %1$s</string>
+    <string name="task_set_failed_content_description">Merkitse tehtävä epäonnistuneeksi: %1$s</string>
+    <string name="task_set_skip_content_description">Ohita tehtävä: %1$s</string>
+
+    <string name="all_tasks_done">Kaikki valmista tänään!\nKatso uudestaan huomenna</string>
+
+    <!--Errors-->
+    <string name="error_load_habit">Virhe: Rutiinia ei pystytty lataamaan</string>
+    <string name="error_delete_habit">Virhe: Rutiinia ei pystytty poistamaan</string>
+
+    <!--Notifications-->
+    <string name="notification_tasks_left_plural">%1$d tehtävää jäljellä täksi päiväksi</string>
+    <string name="notification_tasks_left_one">1 tehtävä jäljellä täksi päiväksi</string>
+    <string name="notification_tasks_done">Kaikki tehtävät tehty täksi päiväksi</string>
+
+    <!--Settings-->
+    <string name="setting_notification_enable_title">Ota tehtävämuistutukset käyttöön</string>
+    <string name="setting_notification_enable_summary">Näyttää kuinka monta tehtävää on vielä jäljellä täksi päiväksi</string>
+
+    <string name="setting_touch_feedback_title">Värinäpalaute</string>
+    <string name="setting_touch_feedback_summary">Antaa värinäpalautteen, kun tehtävä merkataan suoritetuksi</string>
+
+    <string name="setting_delete_all_habits_title">Poista kaikki data</string>
+    <string name="setting_delete_all_habits_summary">Poistaa kaikki rutiinit ja tehtävien tiedot sovelluksesta</string>
+
+    <string name="setting_delete_all_habits_confirmation">Haluatko poistaa kaikki rutiinit ja tehtävien tiedot sovelluksesta? Tätä toimenpidettä ei voi perua.</string>
+    <string name="setting_delete_all_habits_done">Kaikki data poistettu</string>
+
+    <string name="setting_task_stat_title">Näytettävä tieto tehtävässä</string>
+
+    <string name="setting_task_sort_title">Järjestä tehtävät listalla</string>
+</resources>

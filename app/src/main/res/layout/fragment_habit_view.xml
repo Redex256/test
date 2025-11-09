@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/habitInfoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:padding="@dimen/largePadding"
+        android:background="@color/colorPrimaryBackground"
+        android:elevation="@dimen/elevation"
+
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/habitNameText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/habitIcon"
+            style="@style/HeaderStyle"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/habitIcon"
+            android:layout_width="@dimen/itemIconSize"
+            android:layout_height="@dimen/itemIconSize"
+            android:tint="@color/colorIconTint"
+
+            app:layout_constraintTop_toTopOf="@id/habitNameText"
+            app:layout_constraintBottom_toBottomOf="@id/habitNameText"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/habitRecurrenceText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mediumMargin"
+
+            app:layout_constraintTop_toBottomOf="@id/habitNameText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/habitIcon"
+            style="@style/SubHeaderStyle"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/habitPriorityText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/smallMargin"
+
+            app:layout_constraintTop_toBottomOf="@id/habitRecurrenceText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/habitIcon"
+            style="@style/SubHeaderStyle"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/scoreTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/scoreViewHeight"
+            android:layout_marginTop="@dimen/smallMargin"
+
+            style="@style/ScoreTextStyle"
+
+            app:layout_constraintTop_toBottomOf="@id/habitPriorityText"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/habitDisableSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/disable_tasks_switch_content_description"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/habitInfoLayout"
+        app:layout_constraintBottom_toTopOf="@id/viewTaskLogsButton">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include android:id="@+id/statCreated" layout="@layout/layout_stat"/>
+            <include android:id="@+id/statTotalSuccesses" layout="@layout/layout_stat"/>
+            <include android:id="@+id/statHighestScore" layout="@layout/layout_stat"/>
+
+            <com.santtuhyvarinen.habittracker.views.HabitTimelineView
+                android:id="@+id/habitTimelineView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/habitTimelineHeight"
+                android:layout_marginTop="@dimen/smallMargin"
+
+                app:iconSize="@dimen/habitTimelineIconSize"
+                app:days="7"
+                app:textColor="@color/colorTextPrimary"
+                app:textSize="@dimen/smallTextSize"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/viewTaskLogsButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/buttonHeight"
+        android:text="@string/view_task_logs"
+        style="@style/ButtonStyle"
+        android:layout_margin="@dimen/largeMargin"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        style="?android:attr/progressBarStyleHorizontal"
+
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

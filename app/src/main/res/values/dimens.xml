@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Generic-->
+    <dimen name="smallMargin">5dp</dimen>
+    <dimen name="mediumMargin">10dp</dimen>
+    <dimen name="largeMargin">15dp</dimen>
+
+    <dimen name="smallPadding">5dp</dimen>
+    <dimen name="mediumPadding">10dp</dimen>
+    <dimen name="largePadding">15dp</dimen>
+
+    <dimen name="extraSmallTextSize">10sp</dimen>
+    <dimen name="smallTextSize">14sp</dimen>
+    <dimen name="mediumTextSize">18sp</dimen>
+    <dimen name="titleTextSize">26dp</dimen>
+
+    <dimen name="elevation">5dp</dimen>
+
+    <!--Navigation-->
+    <dimen name="bottomNavigationHeight">60dp</dimen>
+    <dimen name="toolbarHeight">60dp</dimen>
+    <dimen name="toolbarButtonSize">48dp</dimen>
+
+    <dimen name="timeBarHeight">40dp</dimen>
+
+    <dimen name="buttonHeight">60dp</dimen>
+    <dimen name="roundButtonSize">48dp</dimen>
+    <dimen name="largeRoundButtonSize">54dp</dimen>
+
+    <dimen name="floatingActionButtonSize">50dp</dimen>
+
+    <!--Tasks-->
+    <dimen name="taskCardHeight">80dp</dimen>
+    <dimen name="taskIconSize">30dp</dimen>
+
+    <dimen name="taskPopUpTextSize">36sp</dimen>
+
+    <!--Habits-->
+    <dimen name="itemHeight">80dp</dimen>
+    <dimen name="itemIconSize">30dp</dimen>
+
+    <dimen name="itemTaskLogHeight">60dp</dimen>
+
+    <!--HabitView-->
+    <dimen name="habitIconSize">40dp</dimen>
+
+    <dimen name="scoreViewHeight">30dp</dimen>
+    <dimen name="scoreTextSize">16sp</dimen>
+    <dimen name="scoreViewCornerRadius">15dp</dimen>
+
+    <dimen name="markTaskDialogWidth">350dp</dimen>
+
+    <!--Stats-->
+    <dimen name="statHeight">40dp</dimen>
+    <dimen name="habitTimelineHeight">100dp</dimen>
+    <dimen name="habitTimelineIconSize">48dp</dimen>
+    <dimen name="lineGraphHeight">200dp</dimen>
+    <dimen name="lineChartStrokeWidth">5dp</dimen>
+    <dimen name="lineChartDotRadiusWidth">5dp</dimen>
+    <dimen name="columnChartCornerRadius">5dp</dimen>
+    <dimen name="columnChartColumnMaxWidth">48dp</dimen>
+
+</resources>

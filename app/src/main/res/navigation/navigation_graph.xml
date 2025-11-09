@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/tasksFragment">
+
+    <!--Home and task List screen-->
+    <fragment
+        android:id="@+id/tasksFragment"
+        android:label="@string/tasks"
+        android:name="com.santtuhyvarinen.habittracker.fragments.TasksFragment"
+        tools:layout="@layout/fragment_tasks">
+    </fragment>
+
+    <!--Statistics screen-->
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:label="@string/statistics"
+        android:name="com.santtuhyvarinen.habittracker.fragments.StatisticsFragment"
+        tools:layout="@layout/fragment_statistics">
+
+        <action
+            android:id="@+id/action_from_statisticsFragment_to_habitViewFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:destination="@id/habitViewFragment"/>
+    </fragment>
+
+    <!--Habit list screen-->
+    <fragment
+        android:id="@+id/habitsFragment"
+        android:label="@string/habits"
+        android:name="com.santtuhyvarinen.habittracker.fragments.HabitsFragment"
+        tools:layout="@layout/fragment_habits">
+
+        <action
+            android:id="@+id/action_from_habitsFragment_to_habitViewFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:destination="@id/habitViewFragment">
+            <argument
+                android:name="habit_id"
+                app:argType="long"
+                android:defaultValue="-1L" />
+        </action>
+    </fragment>
+
+    <!--Habit view screen-->
+    <fragment
+        android:id="@+id/habitViewFragment"
+        android:label="@string/habit"
+        android:name="com.santtuhyvarinen.habittracker.fragments.HabitViewFragment"
+        tools:layout="@layout/fragment_habit_view">
+
+        <argument
+            android:name="habit_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+
+        <action
+            android:id="@+id/action_from_habitViewFragment_to_habitFormFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:destination="@id/habitFormFragment">
+            <argument
+                android:name="habit_id"
+                app:argType="long"
+                android:defaultValue="-1L" />
+        </action>
+
+        <action
+            android:id="@+id/action_from_habitViewFragment_to_taskManagementFragment"
+            app:enterAnim="@anim/anim_slide_in"
+            app:exitAnim="@anim/anim_slide_out"
+            app:destination="@id/taskManagementFragment">
+            <argument
+                android:name="habit_id"
+                app:argType="long"
+                android:defaultValue="-1L" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/taskManagementFragment"
+        android:label="@string/task_logs"
+        android:name="com.santtuhyvarinen.habittracker.fragments.TaskManagementFragment"
+        tools:layout="@layout/fragment_task_management">
+
+        <argument
+            android:name="habit_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+
+    <!--Habit form screen-->
+    <fragment
+        android:id="@+id/habitFormFragment"
+        android:label="@string/habit"
+        android:name="com.santtuhyvarinen.habittracker.fragments.HabitFormFragment"
+        tools:layout="@layout/fragment_habit_form">
+
+        <argument
+            android:name="habit_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+
+    <!--Open Habit form action-->
+    <action
+        android:id="@+id/action_to_habitFormFragment"
+        app:enterAnim="@anim/anim_slide_in"
+        app:exitAnim="@anim/anim_slide_out"
+        app:destination="@id/habitFormFragment"/>
+
+    <!--Open Habit view action-->
+    <action
+        android:id="@+id/action_to_habitViewFragment"
+        app:enterAnim="@anim/anim_slide_in"
+        app:exitAnim="@anim/anim_slide_out"
+        app:destination="@id/habitViewFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@id/habitFormFragment"
+        app:popUpToInclusive="true">
+        <argument
+            android:name="habit_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </action>
+
+    <!--Settings screen-->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:label="@string/settings"
+        android:name="com.santtuhyvarinen.habittracker.fragments.SettingsFragment">
+    </fragment>
+
+    <!--Open settings action-->
+    <action
+        android:id="@+id/action_to_settingsFragment"
+        app:enterAnim="@anim/anim_slide_in"
+        app:exitAnim="@anim/anim_slide_out"
+        app:destination="@id/settingsFragment"/>
+
+</navigation>

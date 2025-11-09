@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="WeekDays">
+        <item>maanantai</item>
+        <item>tiistai</item>
+        <item>keskiviikko</item>
+        <item>torstai</item>
+        <item>perjantai</item>
+        <item>lauantai</item>
+        <item>sunnuntai</item>
+    </string-array>
+
+    <string-array name="WeekDaysLetters">
+        <item>M</item>
+        <item>T</item>
+        <item>K</item>
+        <item>T</item>
+        <item>P</item>
+        <item>L</item>
+        <item>S</item>
+    </string-array>
+
+    <string-array name="WeekDaysShort">
+        <item>ma</item>
+        <item>ti</item>
+        <item>ke</item>
+        <item>to</item>
+        <item>pe</item>
+        <item>la</item>
+        <item>su</item>
+    </string-array>
+
+    <string-array name="PriorityLevels">
+        <item>Hyvin alhainen</item>
+        <item>Alhainen</item>
+        <item>Keskitaso</item>
+        <item>Korkea</item>
+        <item>Hyvin korkea</item>
+    </string-array>
+
+    <string-array name="HabitIconTitles">
+        <item>Suosikki</item>
+        <item>Tähti</item>
+        <item>Peukku ylös</item>
+        <item>Kirja</item>
+        <item>Kävely</item>
+        <item>Emoji</item>
+        <item>Ruoka</item>
+
+        <item>Kello</item>
+        <item>Aurinko</item>
+        <item>Kukka</item>
+
+        <item>Kuntosali</item>
+        <item>Rentoudu</item>
+        <item>Henkilö</item>
+    </string-array>
+
+    <string-array name="TaskValueEntries">
+        <item>Ei mitään</item>
+        <item>Pisteet</item>
+        <item>Tehtäviä suoritettu yhteensä</item>
+    </string-array>
+
+    <string-array name="SortTasksEntries">
+        <item>Aakkosjärjestyksessä</item>
+        <item>Prioriteetin mukaan</item>
+        <item>Pisteiden mukaan</item>
+    </string-array>
+</resources>

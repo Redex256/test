@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff7043</color>
+    <color name="colorPrimaryLight">#ffa270</color>
+    <color name="colorPrimaryDark">#c63f17</color>
+    <color name="colorPrimaryBackground">#fafafa</color>
+
+    <color name="colorSecondary">#78909c</color>
+    <color name="colorSecondaryLight">#a7c0cd</color>
+    <color name="colorSecondaryDark">#4b636e</color>
+    <color name="colorSecondaryBackground">#4e6b78</color>
+
+    <color name="colorSecondaryTransparent">#5578909c</color>
+
+    <color name="colorTextPrimary">#212121</color>
+    <color name="colorTextPrimaryLight">#414141</color>
+    <color name="colorTextSecondary">#f1f1f1</color>
+
+    <color name="colorIconTint">#515151</color>
+    <color name="colorIconTintLight">#B1B1B1</color>
+
+    <color name="colorRipple">#aa8a8a8a</color>
+
+    <color name="colorNavigationElement">#aa8a8a8a</color>
+
+    <color name="colorTaskBackground">#aa8a8a8a</color>
+
+    <color name="dividerColor">#dadada</color>
+
+    <color name="colorFail">#d43b3b</color>
+    <color name="colorSuccess">#2c9e4b</color>
+    <color name="colorSkipped">#fefefe</color>
+
+    <color name="colorLineGraphBackground">#558a8a8a</color>
+
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>

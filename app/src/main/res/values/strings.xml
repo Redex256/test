@@ -1,0 +1,119 @@
+<resources>
+    <string name="app_name">Habit Tracker</string>
+
+    <string name="tasks">Tasks</string>
+    <string name="habits">Звички</string>
+    <string name="habit">Звички</string>
+    <string name="settings">Налаштування</string>
+    <string name="statistics">Геймифікація</string>
+
+
+    <!--Habits-->
+    <string name="create_habit">Створити нову звичку</string>
+    <string name="edit_habit">Змінити</string>
+    <string name="delete_habit">Видалити</string>
+    <string name="save_changes">Зберегти</string>
+
+    <string name="no_habits_message">You haven\'t added any habits yet\nAdd a new habit by pressing the + button</string>
+
+    <string name="error_name_empty">Назва звички не може бути пустою</string>
+
+    <string name="habit_delete_confirmation">Are you sure? This action is irreversible.</string>
+
+    <string name="create">Create</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="deleted">%1$s deleted</string>
+
+    <string name="habit_name">Name</string>
+    <string name="habit_repeat">Repeat</string>
+    <string name="habit_repeat_days">Repeat: Every %1$s</string>
+    <string name="habit_repeat_every_day">Repeat: Daily</string>
+    <string name="and">and</string>
+    <string name="daily">Щодня</string>
+    <string name="repeat_every">Кожного %1$s</string>
+
+
+    <string name="task_already_marked">A task log already exists for the date</string>
+    <string name="task_log_added">Task log added</string>
+    <string name="disable_tasks_switch_content_description">Enable tasks</string>
+    <string name="tasks_disabled">Tasks disabled</string>
+    <string name="tasks_enabled">Tasks enabled</string>
+
+    <!--Task management-->
+    <string name="task_logs">Task logs</string>
+    <string name="view_task_logs">View task logs</string>
+    <string name="add_task_log">Add a new task log</string>
+    <string name="for_date">For date: %1$s</string>
+
+    <!--Score-->
+    <string name="score_content_description">Habit Score: +%1$d</string>
+    <string name="total_completed_content_description">Total tasks completed: %1$d</string>
+    <string translatable="false" name="score_text">+%1$d</string>
+
+    <string name="habit_priority">Habit Priority</string>
+    <string name="habit_priority_header">Пріоритет: %1$s</string>
+
+    <string name="habit_icon">Icon</string>
+
+    <!--Statistics-->
+    <string name="created">Created</string>
+    <string name="total_success">Total tasks completed</string>
+    <string name="highest_score">Highest streak</string>
+    <string name="stat_habits">Habits</string>
+    <string name="stat_average_task_success_per_day">Average number of tasks completed per day</string>
+    <string name="stat_task_success_per_day">Completed tasks per day</string>
+    <string name="stat_task_scheduled_per_weekday">Scheduled tasks per weekday</string>
+    <string name="select_date_content_description">Select Date</string>
+    <string name="select_columns_content_description">Select View</string>
+
+    <string name="columns_week">Week</string>
+    <string name="columns_two_weeks">2 Weeks</string>
+    <string name="columns_month">Month</string>
+
+    <!--Tasks-->
+    <string name="task_set_success">Mark task as done</string>
+    <string name="task_set_failed">Mark task as failed</string>
+    <string name="task_set_skip">Skip task</string>
+    <string name="task_done">Done!</string>
+    <string name="task_failed">Failed</string>
+    <string name="task_skipped">Skip</string>
+
+    <string name="task_set_success_content_description">Mark task as done: %1$s</string>
+    <string name="task_set_failed_content_description">Mark task as failed: %1$s</string>
+    <string name="task_set_skip_content_description">Skip task: %1$s</string>
+
+    <string name="all_tasks_done">Everything done for today!\nCheck again tomorrow</string>
+
+    <!--Errors-->
+    <string name="error_load_habit">Error: Can\'t show the habit</string>
+    <string name="error_delete_habit">Error: Could not delete the habit</string>
+
+    <!--Notifications-->
+    <string name="notification_tasks_left_plural">%1$d tasks left for today</string>
+    <string name="notification_tasks_left_one">1 task left for today</string>
+    <string name="notification_tasks_done">All tasks done for today</string>
+
+    <!--Settings-->
+    <string translatable="false" name="setting_notification_enable_key">enable_notifications_key</string>
+    <string name="setting_notification_enable_title">Enable task notifications</string>
+    <string name="setting_notification_enable_summary">Shows how many tasks are still left for today</string>
+
+    <string translatable="false" name="setting_touch_feedback_key">touch_feedback_key</string>
+    <string name="setting_touch_feedback_title">Touch feedback</string>
+    <string name="setting_touch_feedback_summary">Give touch feedback on task completion</string>
+
+    <string translatable="false" name="setting_delete_all_habits_key">delete_habits_key</string>
+    <string name="setting_delete_all_habits_title">Delete all data</string>
+    <string name="setting_delete_all_habits_summary">Deletes all habits and task data from the app</string>
+
+    <string name="setting_delete_all_habits_confirmation">Delete all habits and task data from the app? This action is irreversible.</string>
+    <string name="setting_delete_all_habits_done">All data deleted</string>
+
+    <string translatable="false" name="setting_task_stat_key">task_display_stat_key</string>
+    <string name="setting_task_stat_title">Displayed stat value in a task</string>
+
+    <string translatable="false" name="setting_task_sort_key">task_sort_key</string>
+    <string name="setting_task_sort_title">Sort tasks in the task list</string>
+</resources>

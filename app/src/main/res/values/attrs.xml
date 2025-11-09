@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="textSize" format="dimension"/>
+    <attr name="textColor" format="color"/>
+
+    <declare-styleable name="HabitTimelineView">
+        <attr name="days" format="integer"/>
+        <attr name="textSize"/>
+        <attr name="textColor"/>
+        <attr name="iconSize" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="ChartView">
+
+        <attr name="chartType" format="enum">
+            <enum name="line" value="0"/>
+            <enum name="column" value="1"/>
+        </attr>
+
+        <attr name="columnMaxWidth" format="dimension"/>
+        <attr name="columnCornerRadius" format="dimension"/>
+        <attr name="columns" format="integer"/>
+        <attr name="rows" format="integer"/>
+        <attr name="lineColor" format="color"/>
+        <attr name="lineStrokeWidth" format="dimension"/>
+        <attr name="backgroundLineColor" format="color"/>
+        <attr name="backgroundLineStrokeWidth" format="dimension"/>
+        <attr name="dotRadius" format="dimension"/>
+        <attr name="textSize"/>
+        <attr name="textColor"/>
+        <attr name="entryAnimationOn" format="boolean"/>
+        <attr name="entryAnimationSpeed" format="float"/>
+    </declare-styleable>
+</resources>
