@@ -5,7 +5,8 @@
     <string name="habits">Звички</string>
     <string name="habit">Звички</string>
     <string name="settings">Налаштування</string>
-    <string name="statistics">Геймифікація</string>
+    <string name="statistics">Статистика</string>
+    <string name="plant">Рослина</string>
 
 
     <!--Habits-->
@@ -50,7 +51,7 @@
     <!--Score-->
     <string name="score_content_description">Habit Score: +%1$d</string>
     <string name="total_completed_content_description">Total tasks completed: %1$d</string>
-    <string translatable="false" name="score_text">+%1$d</string>
+    <string name="score_text" translatable="false">+%1$d</string>
 
     <string name="habit_priority">Habit Priority</string>
     <string name="habit_priority_header">Пріоритет: %1$s</string>
@@ -96,24 +97,28 @@
     <string name="notification_tasks_done">All tasks done for today</string>
 
     <!--Settings-->
-    <string translatable="false" name="setting_notification_enable_key">enable_notifications_key</string>
+    <string name="setting_notification_enable_key" translatable="false">enable_notifications_key</string>
     <string name="setting_notification_enable_title">Enable task notifications</string>
     <string name="setting_notification_enable_summary">Shows how many tasks are still left for today</string>
 
-    <string translatable="false" name="setting_touch_feedback_key">touch_feedback_key</string>
+    <string name="setting_touch_feedback_key" translatable="false">touch_feedback_key</string>
     <string name="setting_touch_feedback_title">Touch feedback</string>
     <string name="setting_touch_feedback_summary">Give touch feedback on task completion</string>
 
-    <string translatable="false" name="setting_delete_all_habits_key">delete_habits_key</string>
+    <string name="setting_delete_all_habits_key" translatable="false">delete_habits_key</string>
     <string name="setting_delete_all_habits_title">Delete all data</string>
     <string name="setting_delete_all_habits_summary">Deletes all habits and task data from the app</string>
 
     <string name="setting_delete_all_habits_confirmation">Delete all habits and task data from the app? This action is irreversible.</string>
     <string name="setting_delete_all_habits_done">All data deleted</string>
 
-    <string translatable="false" name="setting_task_stat_key">task_display_stat_key</string>
+    <string name="setting_task_stat_key" translatable="false">task_display_stat_key</string>
     <string name="setting_task_stat_title">Displayed stat value in a task</string>
 
-    <string translatable="false" name="setting_task_sort_key">task_sort_key</string>
+    <string name="setting_task_sort_key" translatable="false">task_sort_key</string>
     <string name="setting_task_sort_title">Sort tasks in the task list</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="plant_growth">Ріст рослини</string>
+
 </resources>

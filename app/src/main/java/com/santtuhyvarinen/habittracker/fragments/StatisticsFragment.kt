@@ -18,173 +18,149 @@ import org.joda.time.DateTime
 
 class StatisticsFragment : Fragment() {
 
-    private lateinit var statisticsViewModel: StatisticsViewModel
-
     private var _binding: FragmentStatisticsBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var viewModel: StatisticsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         _binding = FragmentStatisticsBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this)[StatisticsViewModel::class.java]
 
-        // ViewModel
-        statisticsViewModel = ViewModelProvider(this)[StatisticsViewModel::class.java]
-
-        // Loading observer
-        statisticsViewModel.getLoadingLiveData().observe(viewLifecycleOwner) { loading ->
-            updateProgress(!loading)
-        }
-
-        // Habits observer
-        statisticsViewModel.getHabitsWithTaskLogs().observe(viewLifecycleOwner) { list ->
-            statisticsViewModel.habitsWithTaskLogs = list
-            updateStats()
-            statisticsViewModel.generateData()
-        }
-
-        // Chart observers
-        statisticsViewModel.getCompletedTasksChartData().observe(viewLifecycleOwner) {
-            updateLineChartView(it)
-        }
-
-        statisticsViewModel.getScheduledTasksChartData().observe(viewLifecycleOwner) {
-            updateScheduledTasksChartView(it)
-        }
-
-        // -----------------------------
-        // PLANT OBSERVERS
-        // -----------------------------
-        statisticsViewModel.plantPoints.observe(viewLifecycleOwner) {
-            binding.plantPointsText.text = "Бали: $it"
-        }
-
-        statisticsViewModel.plantGrowth.observe(viewLifecycleOwner) {
-            updatePlantImage(it)
-        }
-
-        binding.waterPlantButton.setOnClickListener {
-            statisticsViewModel.addWater()   // <-- FIXED
-        }
-        // -----------------------------
-
-        // Buttons
-        binding.selectColumnsLineChartViewButton.setOnClickListener { showColumnsMenu() }
-        binding.selectDateLineChartViewButton.setOnClickListener { showDatePickerDialog() }
-
-        // Stat headers
-        setStatHeader(binding.statHabits, getString(R.string.stat_habits))
-        setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
-        setStatHeader(binding.statAverageSuccesses, getString(R.string.stat_average_task_success_per_day))
+        setupObservers()
+        setupButtons()
+        setupHeaders()
 
         return binding.root
     }
 
-    // ---------------------------------------
-    // CHART UPDATE FUNCTIONS
-    // ---------------------------------------
+    // ---------------------------------------------------------
+    // OBSERVERS
+    // ---------------------------------------------------------
+    private fun setupObservers() {
 
-    private fun updateLineChartView(data: List<ChartDataModel>) {
-        binding.completedTasksChartView.chartData = data
-        binding.completedTasksChartView.columns = statisticsViewModel.lineChartColumns
-        binding.completedTasksChartView.rows =
-            if (data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
+        viewModel.getLoadingLiveData().observe(viewLifecycleOwner) { loading ->
+            updateProgress(!loading)
+        }
+
+        viewModel.getHabitsWithTaskLogs().observe(viewLifecycleOwner) { habits ->
+            viewModel.habitsWithTaskLogs = habits
+            updateStats()
+            viewModel.generateData()
+        }
+
+        viewModel.getCompletedTasksChartData().observe(viewLifecycleOwner) {
+            updateLineChartView(it)
+        }
+
+        viewModel.getScheduledTasksChartData().observe(viewLifecycleOwner) {
+            updateScheduledTasksChartView(it)
+        }
     }
 
+    // ---------------------------------------------------------
+    // BUTTONS
+    // ---------------------------------------------------------
+    private fun setupButtons() {
+        binding.selectColumnsLineChartViewButton.setOnClickListener { showColumnsMenu() }
+        binding.selectDateLineChartViewButton.setOnClickListener { showDatePicker() }
+    }
+
+    // ---------------------------------------------------------
+    // HEADERS
+    // ---------------------------------------------------------
+    private fun setupHeaders() {
+        setHeader(binding.statHabits, getString(R.string.stat_habits))
+        setHeader(binding.statTotalSuccesses, getString(R.string.total_success))
+        setHeader(binding.statAverageSuccesses, getString(R.string.stat_average_task_success_per_day))
+    }
+
+    // ---------------------------------------------------------
+    // UPDATE STATISTICS
+    // ---------------------------------------------------------
+    private fun updateStats() {
+        val list = viewModel.habitsWithTaskLogs
+        updateValue(binding.statHabits, list.size.toString())
+        updateValue(binding.statTotalSuccesses, StatisticsUtil.getTotalSuccessesForHabits(list).toString())
+        updateValue(binding.statAverageSuccesses, "%.1f".format(StatisticsUtil.getAverageTasksCompletedByDay(list)))
+    }
+
+    private fun setHeader(stat: LayoutStatBinding, text: String) {
+        stat.statHeaderText.text = text
+    }
+
+    private fun updateValue(stat: LayoutStatBinding, value: String) {
+        stat.statValueText.text = value
+    }
+
+    // ---------------------------------------------------------
+    // LINE CHART
+    // ---------------------------------------------------------
+    private fun updateLineChartView(data: List<ChartDataModel>) {
+        binding.completedTasksChartView.chartData = data
+        binding.completedTasksChartView.columns = viewModel.lineChartColumns
+        binding.completedTasksChartView.rows =
+            if (data.isNotEmpty()) data.maxOf { it.value } + 2 else 0
+    }
+
+    // ---------------------------------------------------------
+    // COLUMN CHART
+    // ---------------------------------------------------------
     private fun updateScheduledTasksChartView(data: List<ChartDataModel>) {
         binding.scheduledTasksChartView.chartData = data
         binding.scheduledTasksChartView.rows =
-            if (data.isNotEmpty()) (data.maxOf { it.value }.coerceAtLeast(5)) + 1 else 0
+            if (data.isNotEmpty()) data.maxOf { it.value } + 2 else 0
     }
 
-    // ---------------------------------------
+    // ---------------------------------------------------------
     // DATE PICKER
-    // ---------------------------------------
+    // ---------------------------------------------------------
+    private fun showDatePicker() {
+        val d = viewModel.getSelectedDate()
 
-    private fun showDatePickerDialog() {
-        val selectedDate = statisticsViewModel.getSelectedDate()
-
-        val dialog = DatePickerDialog(
+        DatePickerDialog(
             requireContext(),
             { _, year, month, day ->
-                val date = DateTime.now()
-                    .withYear(year)
-                    .withMonthOfYear(month + 1)
-                    .withDayOfMonth(day)
-
-                statisticsViewModel.setSelectedDate(date)
+                viewModel.setSelectedDate(
+                    DateTime.now().withYear(year).withMonthOfYear(month + 1).withDayOfMonth(day)
+                )
             },
-            selectedDate.year,
-            selectedDate.monthOfYear - 1,
-            selectedDate.dayOfMonth
-        )
-
-        dialog.show()
+            d.year,
+            d.monthOfYear - 1,
+            d.dayOfMonth
+        ).show()
     }
 
-    // ---------------------------------------
-    // COLUMNS MENU
-    // ---------------------------------------
-
+    // ---------------------------------------------------------
+    // MENU FOR COLUMNS
+    // ---------------------------------------------------------
     private fun showColumnsMenu() {
-        val popupMenu = PopupMenu(activity, binding.selectColumnsLineChartViewButton)
-        popupMenu.menuInflater.inflate(R.menu.menu_select_columns, popupMenu.menu)
+        val menu = PopupMenu(requireContext(), binding.selectColumnsLineChartViewButton)
+        menu.menuInflater.inflate(R.menu.menu_select_columns, menu.menu)
 
-        popupMenu.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.columnsWeekView -> statisticsViewModel.setColumns(7)
-                R.id.columnsTwoWeeksView -> statisticsViewModel.setColumns(14)
-                R.id.columnsMonthView -> statisticsViewModel.setColumns(30)
+        menu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.columnsWeekView -> viewModel.setColumns(7)
+                R.id.columnsTwoWeeksView -> viewModel.setColumns(14)
+                R.id.columnsMonthView -> viewModel.setColumns(30)
             }
             true
         }
 
-        popupMenu.show()
+        menu.show()
     }
 
-    // ---------------------------------------
-    // STATS UPDATE
-    // ---------------------------------------
-
-    private fun updateStats() {
-        val habits = statisticsViewModel.habitsWithTaskLogs
-        updateStatValue(binding.statHabits, habits.size.toString())
-        updateStatValue(binding.statTotalSuccesses, StatisticsUtil.getTotalSuccessesForHabits(habits).toString())
-        updateStatValue(binding.statAverageSuccesses, "%.1f".format(StatisticsUtil.getAverageTasksCompletedByDay(habits)))
-    }
-
-    private fun setStatHeader(stat: LayoutStatBinding, headerText: String) {
-        stat.statHeaderText.text = headerText
-    }
-
-    private fun updateStatValue(stat: LayoutStatBinding, value: String) {
-        stat.statValueText.text = value
-    }
-
-    // ---------------------------------------
-    // UPDATE PLANT IMAGE
-    // ---------------------------------------
-
-    private fun updatePlantImage(level: Float) {
-        val img = when {
-            level < 0.2f -> R.drawable.plant_stage_0
-            level < 0.4f -> R.drawable.plant_stage_1
-            level < 0.6f -> R.drawable.plant_stage_2
-            level < 0.8f -> R.drawable.plant_stage_3
-            else -> R.drawable.plant_stage_4
-        }
-        binding.plantImageView.setImageResource(img)
-    }
-
-    // ---------------------------------------
-    // PROGRESS HANDLING
-    // ---------------------------------------
-
-    private fun updateProgress(showLayout: Boolean) {
-        binding.progress.visibility = if (showLayout) View.GONE else View.VISIBLE
-        binding.scrollView.visibility = if (showLayout) View.VISIBLE else View.GONE
+    // ---------------------------------------------------------
+    // PROGRESS BAR
+    // ---------------------------------------------------------
+    private fun updateProgress(visible: Boolean) {
+        binding.progress.visibility = if (visible) View.GONE else View.VISIBLE
+        binding.scrollView.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

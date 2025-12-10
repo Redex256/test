@@ -8,7 +8,6 @@
     <include
         android:id="@+id/timeBar"
         layout="@layout/layout_time_bar"
-
         app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -20,7 +19,6 @@
         android:paddingBottom="@dimen/largePadding"
         android:clipToPadding="false"
         android:layoutAnimation="@anim/anim_task_item"
-
         app:layout_constraintTop_toBottomOf="@id/timeBar"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -34,6 +32,6 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         style="?android:attr/progressBarStyleHorizontal"
-
         app:layout_constraintTop_toBottomOf="@id/timeBar"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

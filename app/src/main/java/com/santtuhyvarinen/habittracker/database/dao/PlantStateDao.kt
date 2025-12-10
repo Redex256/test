@@ -10,8 +10,9 @@ import com.santtuhyvarinen.habittracker.database.PlantStateEntity
 interface PlantStateDao {
 
     @Query("SELECT * FROM PlantStateEntity WHERE id = 1")
-    fun getState(): PlantStateEntity?
+    suspend fun getState(): PlantStateEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveState(state: PlantStateEntity)
+    suspend fun saveState(state: PlantStateEntity)
 }
+

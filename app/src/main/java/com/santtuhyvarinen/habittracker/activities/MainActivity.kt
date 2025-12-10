@@ -19,38 +19,38 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
-        //Navigation
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
 
-        //Set up bottom navigation bar and toolbar with NavController
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.tasksFragment,
-            R.id.habitsFragment,
-            R.id.statisticsFragment)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.tasksFragment, R.id.habitsFragment, R.id.statisticsFragment)
         )
 
         binding.toolbarLayout.toolbar.setupWithNavController(navController, appBarConfiguration)
         binding.bottomNavigation.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+        navController.addOnDestinationChangedListener { _, destination, _ ->
 
             when(destination.id) {
-                R.id.habitFormFragment, R.id.settingsFragment, R.id.habitViewFragment, R.id.taskManagementFragment -> {
+                R.id.habitFormFragment,
+                R.id.settingsFragment,
+                R.id.habitViewFragment,
+                R.id.taskManagementFragment -> {
                     hideNavigationElements(true)
                 }
-                else -> {
-                    hideNavigationElements(false)
-                }
+                else -> hideNavigationElements(false)
             }
 
             hideHabitViewButtons(destination.id != R.id.habitViewFragment)
         }
 
-        //Toolbar buttons
+        // New plant button listener
+        binding.toolbarLayout.buttonPlant.setOnClickListener {
+            navController.navigate(R.id.plantGrowthFragment)
+        }
+
         binding.toolbarLayout.settingsButton.setOnClickListener {
             navController.navigate(R.id.action_to_settingsFragment)
         }
@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         SettingsUtil.startNotificationServiceIfEnabled(this)
     }
+
 
     private fun hideNavigationElements(hidden : Boolean) {
         binding.bottomNavigation.visibility = if(hidden) View.GONE else View.VISIBLE

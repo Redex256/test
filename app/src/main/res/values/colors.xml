@@ -4,6 +4,12 @@
     <color name="colorPrimaryLight">#ffa270</color>
     <color name="colorPrimaryDark">#c63f17</color>
     <color name="colorPrimaryBackground">#fafafa</color>
+    <color name="background">#F2F2F7</color>
+    <color name="toolbarBackground">#FAFAFA</color>
+    <color name="textPrimary">#1A1A1A</color>
+    <color name="gray">#8A8A8A</color>
+
+
 
     <color name="colorSecondary">#78909c</color>
     <color name="colorSecondaryLight">#a7c0cd</color>

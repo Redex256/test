@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -13,6 +16,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <!-- твої блоки статистики -->
 
             <include
                 android:id="@+id/statHabits"
@@ -35,6 +40,9 @@
                 layout="@layout/layout_stat"
                 app:layout_constraintTop_toBottomOf="@id/statTotalSuccesses" />
 
+
+            <!-- графік виконаних задач -->
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/completedTasksHeader"
                 android:layout_width="match_parent"
@@ -49,37 +57,34 @@
                 android:id="@+id/selectDateLineChartViewButton"
                 android:layout_width="@dimen/toolbarButtonSize"
                 android:layout_height="@dimen/toolbarButtonSize"
-                android:contentDescription="@string/select_date_content_description"
                 android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_select_date"
+                android:contentDescription="@string/select_date_content_description"
                 app:layout_constraintTop_toTopOf="@id/completedTasksHeader"
-                app:layout_constraintBottom_toBottomOf="@id/completedTasksHeader"
                 app:layout_constraintRight_toRightOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/selectColumnsLineChartViewButton"
                 android:layout_width="@dimen/toolbarButtonSize"
                 android:layout_height="@dimen/toolbarButtonSize"
-                android:contentDescription="@string/select_columns_content_description"
                 android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_columns"
+                android:contentDescription="@string/select_columns_content_description"
                 app:layout_constraintTop_toTopOf="@id/completedTasksHeader"
-                app:layout_constraintBottom_toBottomOf="@id/completedTasksHeader"
                 app:layout_constraintRight_toLeftOf="@id/selectDateLineChartViewButton" />
 
             <com.santtuhyvarinen.habittracker.views.ChartView
                 android:id="@+id/completedTasksChartView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/lineGraphHeight"
-                android:layout_gravity="center"
                 android:padding="@dimen/largePadding"
                 app:chartType="line"
-                app:columnCornerRadius="@dimen/columnChartCornerRadius"
-                app:dotRadius="@dimen/lineChartDotRadiusWidth"
-                app:backgroundLineColor="@color/colorLineGraphBackground"
-                app:textColor="@color/colorTextPrimaryLight"
-                app:textSize="@dimen/smallTextSize"
                 app:lineColor="@color/colorPrimary"
+                app:textColor="@color/colorTextPrimaryLight"
+                app:layout_constraintTop_toBottomOf="@id/completedTasksHeader" />
+
+
+            <!-- графік розкладу -->
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/scheduledTasksHeader"
@@ -95,17 +100,12 @@
                 android:id="@+id/scheduledTasksChartView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/lineGraphHeight"
-                android:layout_gravity="center"
                 android:padding="@dimen/largePadding"
                 app:chartType="column"
                 app:columns="7"
-                app:columnCornerRadius="@dimen/columnChartCornerRadius"
-                app:dotRadius="@dimen/lineChartDotRadiusWidth"
-                app:backgroundLineColor="@color/colorLineGraphBackground"
-                app:textColor="@color/colorTextPrimaryLight"
-                app:textSize="@dimen/smallTextSize"
                 app:lineColor="@color/colorPrimary"
-
+                app:textColor="@color/colorTextPrimaryLight"
+                app:layout_constraintTop_toBottomOf="@id/scheduledTasksHeader" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -116,5 +116,5 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         style="?android:attr/progressBarStyleHorizontal"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
