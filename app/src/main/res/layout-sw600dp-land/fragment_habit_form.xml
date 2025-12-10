@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/centerGuide"
@@ -31,31 +32,37 @@
             android:layout_height="wrap_content"
             android:clipChildren="false">
 
+            <!-- Назва звички -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/habitNameInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
+                android:hint="@string/habit_name"
+                app:boxStrokeColor="@color/colorPrimary"
+                app:hintTextColor="@color/textPrimaryLight"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/habitNameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:textColor="@color/textPrimary"
+                    android:textColorHint="@color/textPrimaryLight"
                     android:inputType="text|textCapSentences"
-                    android:imeOptions="actionDone"
-                    android:hint="@string/habit_name"/>
+                    android:imeOptions="actionDone"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Повторення -->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/weekDayPickerHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/habit_repeat"
+                android:textColor="@color/textPrimary"
                 android:layout_marginTop="@dimen/largeMargin"
                 style="@style/HabitFormHeaderStyle"
-
                 app:layout_constraintTop_toBottomOf="@id/habitNameInputLayout"/>
 
             <com.santtuhyvarinen.habittracker.views.WeekDayPickerView
@@ -65,17 +72,17 @@
                 android:layout_marginTop="@dimen/smallMargin"
                 android:clipToPadding="false"
                 android:clipChildren="false"
-
                 app:layout_constraintTop_toBottomOf="@id/weekDayPickerHeader"/>
 
+            <!-- Пріоритет -->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/habitPriorityHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/habit_priority"
+                android:textColor="@color/textPrimary"
                 android:layout_marginTop="@dimen/largeMargin"
                 style="@style/HabitFormHeaderStyle"
-
                 app:layout_constraintTop_toBottomOf="@id/weekDayPicker"/>
 
             <androidx.appcompat.widget.AppCompatSeekBar
@@ -83,52 +90,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/smallMargin"
-                android:contentDescription="@string/habit_priority"
-
+                android:progressTint="@color/colorPrimary"
+                android:thumbTint="@color/colorPrimary"
                 app:layout_constraintTop_toBottomOf="@id/habitPriorityHeader"/>
 
+            <!-- Іконка -->
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/iconPickerHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/habit_icon"
                 android:layout_marginTop="@dimen/largeMargin"
+                android:textColor="@color/textPrimary"
                 style="@style/HabitFormHeaderStyle"
-
                 app:layout_constraintTop_toBottomOf="@id/habitPrioritySeekBar"/>
 
             <com.santtuhyvarinen.habittracker.views.IconPickerView
                 android:id="@+id/iconPickerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 app:layout_constraintTop_toBottomOf="@id/iconPickerHeader"/>
 
-
+            <!-- Кнопка -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/saveHabitButton"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/buttonHeight"
                 android:text="@string/create_habit"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/colorPrimary"
                 style="@style/ButtonStyle"
                 android:layout_margin="@dimen/largeMargin"
-
+                app:cornerRadius="12dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iconPickerView"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
 
-
-
+    <!-- Прогрес завантаження -->
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:indeterminate="true"
         style="?android:attr/progressBarStyleHorizontal"
-
+        android:progressTint="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

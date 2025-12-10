@@ -3,113 +3,163 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
+    <!-- 🌀 Скрол -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:padding="16dp"
+        android:clipToPadding="false"
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:dividerPadding="12dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
-            <!-- твої блоки статистики -->
-
-            <include
-                android:id="@+id/statHabits"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/statHeight"
-                layout="@layout/layout_stat"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <include
-                android:id="@+id/statTotalSuccesses"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/statHeight"
-                layout="@layout/layout_stat"
-                app:layout_constraintTop_toBottomOf="@id/statHabits" />
-
-            <include
-                android:id="@+id/statAverageSuccesses"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/statHeight"
-                layout="@layout/layout_stat"
-                app:layout_constraintTop_toBottomOf="@id/statTotalSuccesses" />
-
-
-            <!-- графік виконаних задач -->
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/completedTasksHeader"
+            <!-- 📊 Блок 1 — Статистика -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/stat_task_success_per_day"
-                android:layout_margin="@dimen/largeMargin"
-                android:textStyle="bold"
-                style="@style/HabitFormHeaderStyle"
-                app:layout_constraintTop_toBottomOf="@id/statAverageSuccesses" />
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp"
+                android:padding="16dp">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/selectDateLineChartViewButton"
-                android:layout_width="@dimen/toolbarButtonSize"
-                android:layout_height="@dimen/toolbarButtonSize"
-                android:background="?selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_select_date"
-                android:contentDescription="@string/select_date_content_description"
-                app:layout_constraintTop_toTopOf="@id/completedTasksHeader"
-                app:layout_constraintRight_toRightOf="parent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/selectColumnsLineChartViewButton"
-                android:layout_width="@dimen/toolbarButtonSize"
-                android:layout_height="@dimen/toolbarButtonSize"
-                android:background="?selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_columns"
-                android:contentDescription="@string/select_columns_content_description"
-                app:layout_constraintTop_toTopOf="@id/completedTasksHeader"
-                app:layout_constraintRight_toLeftOf="@id/selectDateLineChartViewButton" />
+                    <include
+                        android:id="@+id/statHabits"
+                        layout="@layout/layout_stat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/statHeight"/>
 
-            <com.santtuhyvarinen.habittracker.views.ChartView
-                android:id="@+id/completedTasksChartView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/lineGraphHeight"
-                android:padding="@dimen/largePadding"
-                app:chartType="line"
-                app:lineColor="@color/colorPrimary"
-                app:textColor="@color/colorTextPrimaryLight"
-                app:layout_constraintTop_toBottomOf="@id/completedTasksHeader" />
+                    <include
+                        android:id="@+id/statTotalSuccesses"
+                        layout="@layout/layout_stat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/statHeight"/>
+
+                    <include
+                        android:id="@+id/statAverageSuccesses"
+                        layout="@layout/layout_stat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/statHeight"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
 
-            <!-- графік розкладу -->
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/scheduledTasksHeader"
+            <!-- 📈 Блок 2 — Графік виконаних задач -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/stat_task_scheduled_per_weekday"
-                android:layout_margin="@dimen/largeMargin"
-                android:textStyle="bold"
-                style="@style/HabitFormHeaderStyle"
-                app:layout_constraintTop_toBottomOf="@id/completedTasksChartView" />
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp"
+                android:padding="16dp">
 
-            <com.santtuhyvarinen.habittracker.views.ChartView
-                android:id="@+id/scheduledTasksChartView"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/completedTasksHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stat_task_success_per_day"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/textPrimary"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/selectColumnsLineChartViewButton"/>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/selectDateLineChartViewButton"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_select_date"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintTop_toTopOf="@id/completedTasksHeader"
+                        app:layout_constraintRight_toRightOf="parent"/>
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/selectColumnsLineChartViewButton"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:src="@drawable/ic_columns"
+                        android:tint="@color/colorPrimary"
+                        app:layout_constraintTop_toTopOf="@id/completedTasksHeader"
+                        app:layout_constraintRight_toLeftOf="@id/selectDateLineChartViewButton"
+                        android:layout_marginEnd="4dp"/>
+
+                    <com.santtuhyvarinen.habittracker.views.ChartView
+                        android:id="@+id/completedTasksChartView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/lineGraphHeight"
+                        android:layout_marginTop="16dp"
+                        android:padding="12dp"
+                        app:chartType="line"
+                        app:lineColor="@color/colorPrimary"
+                        app:textColor="@color/textPrimaryLight"
+                        app:layout_constraintTop_toBottomOf="@id/completedTasksHeader"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- 📅 Блок 3 — Розклад -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/lineGraphHeight"
-                android:padding="@dimen/largePadding"
-                app:chartType="column"
-                app:columns="7"
-                app:lineColor="@color/colorPrimary"
-                app:textColor="@color/colorTextPrimaryLight"
-                app:layout_constraintTop_toBottomOf="@id/scheduledTasksHeader" />
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/scheduledTasksHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stat_task_scheduled_per_weekday"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/textPrimary"
+                        android:layout_marginBottom="12dp"/>
+
+                    <com.santtuhyvarinen.habittracker.views.ChartView
+                        android:id="@+id/scheduledTasksChartView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/lineGraphHeight"
+                        android:padding="12dp"
+                        app:chartType="column"
+                        app:columns="7"
+                        app:lineColor="@color/colorPrimary"
+                        app:textColor="@color/textPrimaryLight"/>
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
     </ScrollView>
 
+
+    <!-- 🔄 Прогрес бар -->
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"

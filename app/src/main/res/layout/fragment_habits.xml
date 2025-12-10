@@ -6,42 +6,38 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <!-- Верхній тулбар -->
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <!-- Список звичок -->
+    <!-- 🔹 Список звичок -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="16dp"
+        android:padding="12dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-    <!-- Повідомлення "немає даних" -->
-    <include
-        android:id="@+id/layoutMessage"
-        layout="@layout/layout_message"
+        android:clipChildren="false"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <!-- Індикатор загрузки -->
+    <!-- 🔹 Повідомлення "немає даних" -->
+    <include
+        android:id="@+id/layoutMessage"
+        layout="@layout/layout_message"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <!-- 🔹 Індикатор загрузки -->
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_height="4dp"
         android:indeterminate="true"
+        android:progressTint="@color/colorPrimary"
+        style="?android:attr/progressBarStyleHorizontal"
         app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

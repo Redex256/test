@@ -26,7 +26,8 @@ class HabitViewFragment : Fragment() {
     private var _binding: FragmentHabitViewBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var habitViewModel : HabitViewModel
+    private lateinit var habitViewModel: HabitViewModel
+    private val args: HabitViewFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -34,143 +35,153 @@ class HabitViewFragment : Fragment() {
         return binding.root
     }
 
-    private val args: HabitViewFragmentArgs by navArgs()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        //If habitId is negative, should navigate up and exit fragment
-        if(args.habitId < 0) {
+        // якщо id неправильний → назад
+        if (args.habitId < 0) {
             findNavController().navigateUp()
             return
         }
 
         updateProgress(false)
 
-        habitViewModel = ViewModelProvider(this).get(HabitViewModel::class.java)
+        habitViewModel = ViewModelProvider(this)[HabitViewModel::class.java]
         habitViewModel.initialize(args.habitId)
 
-        //Observe Habit
-        val habitObserver = Observer<HabitWithTaskLogs?> { habit ->
-            if(habit != null) {
-                updateHabitValues(habit)
-            } else {
-                //Could not load habit
-                Toast.makeText(requireContext(), getString(R.string.error_load_habit), Toast.LENGTH_LONG).show()
-                findNavController().navigateUp()
-            }
-        }
-        habitViewModel.getHabitWithTaskLogsLiveData().observe(viewLifecycleOwner, habitObserver)
+        observeHabit()
+        observeExit()
+        setupToolbarButtons()
+        setupUIActions()
 
-        //Observe ShouldExitView variable to exit the fragment
-        val shouldExitViewObserver = Observer<Boolean> { exit ->
-            if(exit) findNavController().navigateUp()
-        }
-        habitViewModel.getShouldExitView().observe(viewLifecycleOwner, shouldExitViewObserver)
-
-        //Edit button on Activity ToolBar
-        val activity = (activity as MainActivity)
-        activity.getEditButton().setOnClickListener {
-            if(context == null) return@setOnClickListener
-
-            val action = HabitViewFragmentDirections.actionFromHabitViewFragmentToHabitFormFragment(args.habitId)
-            findNavController().navigate(action)
-        }
-
-        //Delete button on Activity ToolBar
-        activity.getDeleteButton().setOnClickListener {
-            if(context == null) return@setOnClickListener
-
-            showDeleteConfirmationDialog()
-        }
-
-        binding.habitDisableSwitch.setOnClickListener {
-            handleHabitDisableSwitch(binding.habitDisableSwitch.isChecked)
-        }
-
-        binding.viewTaskLogsButton.setOnClickListener {
-            navigateToTaskManagement()
-        }
-
-        //Update stat headers
+        // назви стат блоків
         setStatHeader(binding.statCreated, getString(R.string.created))
         setStatHeader(binding.statTotalSuccesses, getString(R.string.total_success))
         setStatHeader(binding.statHighestScore, getString(R.string.highest_score))
     }
 
-    private fun handleHabitDisableSwitch(enabled : Boolean) {
-        habitViewModel.setHabitEnabled(enabled)
-
-        val toastStringId = if (enabled) R.string.tasks_enabled else R.string.tasks_disabled
-        Toast.makeText(requireContext(), getString(toastStringId), Toast.LENGTH_SHORT).show()
+    private fun observeHabit() {
+        habitViewModel.getHabitWithTaskLogsLiveData()
+            .observe(viewLifecycleOwner) { habit ->
+                if (habit != null) {
+                    updateHabitValues(habit)
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.error_load_habit), Toast.LENGTH_LONG).show()
+                    findNavController().navigateUp()
+                }
+            }
     }
 
-    private fun updateProgress(showLayout : Boolean) {
-        binding.progress.visibility = if(showLayout) View.GONE else View.VISIBLE
-        binding.habitInfoLayout.visibility = if(showLayout) View.VISIBLE else View.GONE
-        binding.viewTaskLogsButton.visibility = if(showLayout) View.VISIBLE else View.GONE
+    private fun observeExit() {
+        habitViewModel.getShouldExitView()
+            .observe(viewLifecycleOwner) { exit ->
+                if (exit) findNavController().navigateUp()
+            }
     }
+
+    private fun setupToolbarButtons() {
+        val activity = (activity as MainActivity)
+
+        activity.getEditButton().setOnClickListener {
+            val action =
+                HabitViewFragmentDirections.actionFromHabitViewFragmentToHabitFormFragment(args.habitId)
+            findNavController().navigate(action)
+        }
+
+        activity.getDeleteButton().setOnClickListener {
+            showDeleteConfirmationDialog()
+        }
+    }
+
+    private fun setupUIActions() {
+        binding.habitDisableSwitch.setOnClickListener {
+            habitViewModel.setHabitEnabled(binding.habitDisableSwitch.isChecked)
+
+            val toastStringId =
+                if (binding.habitDisableSwitch.isChecked) R.string.tasks_enabled
+                else R.string.tasks_disabled
+
+            Toast.makeText(requireContext(), getString(toastStringId), Toast.LENGTH_SHORT).show()
+        }
+
+        binding.viewTaskLogsButton.setOnClickListener {
+            navigateToTaskManagement()
+        }
+    }
+
+    private fun updateProgress(showLayout: Boolean) {
+        binding.progress.visibility = if (showLayout) View.GONE else View.VISIBLE
+        binding.habitInfoCard.visibility = if (showLayout) View.VISIBLE else View.GONE
+        binding.scrollView.visibility = if (showLayout) View.VISIBLE else View.GONE
+        binding.viewTaskLogsButton.visibility = if (showLayout) View.VISIBLE else View.GONE
+    }
+
 
     private fun updateHabitValues(habitWithTaskLogs: HabitWithTaskLogs) {
         val habit = habitWithTaskLogs.habit
+
         binding.habitNameText.text = habit.name
 
-        //Priority text
+        // пріоритет
         val priorityText = HabitInfoUtil.getPriorityLevelText(requireContext(), habit.priority)
-        binding.habitPriorityText.text = getString(R.string.habit_priority_header, priorityText)
+        binding.habitPriorityText.text =
+            getString(R.string.habit_priority_header, priorityText)
 
-        //WeekDaysText
-        val recurrenceText = habitViewModel.getRecurrenceText(requireContext(), habit)
-        binding.habitRecurrenceText.text = recurrenceText
+        // повторення
+        binding.habitRecurrenceText.text =
+            habitViewModel.getRecurrenceText(requireContext(), habit)
 
-        //Icon
-        val iconKey = habit.iconKey
-        if (iconKey != null)
-            binding.habitIcon.setImageDrawable(habitViewModel.iconManager.getIconByKey(iconKey))
+        // значок
+        habit.iconKey?.let {
+            binding.habitIcon.setImageDrawable(habitViewModel.iconManager.getIconByKey(it))
+        }
 
-        //Score
-        val score = habit.score
-        binding.scoreTextView.text = getString(R.string.score_text, score)
-        binding.scoreTextView.contentDescription = getString(R.string.score_content_description, score)
+        // очки
+        binding.scoreTextView.text = getString(R.string.score_text, habit.score)
 
-        //Disabled
+        // перемикач
         binding.habitDisableSwitch.isChecked = !habit.disabled
 
-        //Update stats
-        updateStatValue(binding.statCreated, CalendarUtil.getDateText(habitWithTaskLogs.habit.creationDate, requireContext()))
-        updateStatValue(binding.statTotalSuccesses, StatisticsUtil.getTotalSuccesses(habitWithTaskLogs).toString())
+        // статистика
+        updateStatValue(binding.statCreated,
+            CalendarUtil.getDateText(habit.creationDate, requireContext())
+        )
+        updateStatValue(binding.statTotalSuccesses,
+            StatisticsUtil.getTotalSuccesses(habitWithTaskLogs).toString()
+        )
 
         val highestScore = StatisticsUtil.getHighestScore(habitWithTaskLogs.taskLogs)
         updateStatValue(binding.statHighestScore, getString(R.string.score_text, highestScore))
 
+        // timeline
         binding.habitTimelineView.setup(habitWithTaskLogs)
 
         updateProgress(true)
     }
 
-    private fun setStatHeader(stat : LayoutStatBinding, headerText : String) {
+    private fun setStatHeader(stat: LayoutStatBinding, headerText: String) {
         stat.statHeaderText.text = headerText
     }
 
-    private fun updateStatValue(stat : LayoutStatBinding, value : String) {
+    private fun updateStatValue(stat: LayoutStatBinding, value: String) {
         stat.statValueText.text = value
     }
 
     private fun showDeleteConfirmationDialog() {
-        val alertDialog = AlertDialog.Builder(requireContext())
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.delete_habit))
+            .setMessage(getString(R.string.habit_delete_confirmation))
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                habitViewModel.deleteHabit(requireContext())
+            }
+            .setNegativeButton(getString(R.string.cancel), null)
+            .create()
 
-        alertDialog.setTitle(getString(R.string.delete_habit))
-        alertDialog.setMessage(getString(R.string.habit_delete_confirmation))
-        alertDialog.setPositiveButton(getString(R.string.delete)) { _, _ -> habitViewModel.deleteHabit(requireContext()) }
-
-        alertDialog.setNegativeButton(getString(R.string.cancel), null)
-
-        val dialog = alertDialog.create()
         dialog.show()
     }
 
     private fun navigateToTaskManagement() {
-        val direction = HabitViewFragmentDirections.actionFromHabitViewFragmentToTaskManagementFragment(args.habitId)
+        val direction =
+            HabitViewFragmentDirections.actionFromHabitViewFragmentToTaskManagementFragment(args.habitId)
         findNavController().navigate(direction)
     }
 

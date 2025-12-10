@@ -1,97 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/habitInfoLayout"
-        android:layout_width="match_parent"
+
+    <!-- 🔹 Картка з інформацією про звичку -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/habitInfoCard"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:strokeWidth="0dp"
+        android:padding="20dp"
 
-        android:padding="@dimen/largePadding"
-        android:background="@color/colorPrimaryBackground"
-        android:elevation="@dimen/elevation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
-        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/habitNameText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            <!-- Назва звички -->
+            <TextView
+                android:id="@+id/habitNameText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Назва звички"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/textPrimary"
 
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/habitIcon"
-            style="@style/HeaderStyle"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/habitIcon" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/habitIcon"
-            android:layout_width="@dimen/itemIconSize"
-            android:layout_height="@dimen/itemIconSize"
-            android:tint="@color/colorIconTint"
+            <!-- Значок -->
+            <ImageView
+                android:id="@+id/habitIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:tint="@color/colorPrimary"
 
-            app:layout_constraintTop_toTopOf="@id/habitNameText"
-            app:layout_constraintBottom_toBottomOf="@id/habitNameText"
-            app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/habitNameText"
+                app:layout_constraintBottom_toBottomOf="@id/habitNameText"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/habitRecurrenceText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/mediumMargin"
+            <!-- Повторення -->
+            <TextView
+                android:id="@+id/habitRecurrenceText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Повторення: Щодня"
+                android:textSize="16sp"
+                android:textColor="@color/textPrimaryLight"
+                android:layout_marginTop="8dp"
 
-            app:layout_constraintTop_toBottomOf="@id/habitNameText"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/habitIcon"
-            style="@style/SubHeaderStyle"/>
+                app:layout_constraintTop_toBottomOf="@id/habitNameText"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/habitIcon"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/habitPriorityText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/smallMargin"
+            <!-- Пріоритет -->
+            <TextView
+                android:id="@+id/habitPriorityText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Пріоритет: Високий"
+                android:textSize="16sp"
+                android:textColor="@color/textPrimaryLight"
+                android:layout_marginTop="6dp"
 
-            app:layout_constraintTop_toBottomOf="@id/habitRecurrenceText"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/habitIcon"
-            style="@style/SubHeaderStyle"/>
+                app:layout_constraintTop_toBottomOf="@id/habitRecurrenceText"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/habitIcon"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/scoreTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/scoreViewHeight"
-            android:layout_marginTop="@dimen/smallMargin"
+            <!-- Очки -->
+            <TextView
+                android:id="@+id/scoreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Очки: 120"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="10dp"
 
-            style="@style/ScoreTextStyle"
+                app:layout_constraintTop_toBottomOf="@id/habitPriorityText"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
-            app:layout_constraintTop_toBottomOf="@id/habitPriorityText"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            <!-- Вимкнути задачі -->
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/habitDisableSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/habitDisableSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/disable_tasks_switch_content_description"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
 
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- 🔹 Прокручуваний блок статистики -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/habitInfoLayout"
+        app:layout_constraintTop_toBottomOf="@id/habitInfoCard"
         app:layout_constraintBottom_toTopOf="@id/viewTaskLogsButton">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:padding="20dp">
 
             <include android:id="@+id/statCreated" layout="@layout/layout_stat"/>
             <include android:id="@+id/statTotalSuccesses" layout="@layout/layout_stat"/>
@@ -101,29 +130,30 @@
                 android:id="@+id/habitTimelineView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/habitTimelineHeight"
-                android:layout_marginTop="@dimen/smallMargin"
-
+                android:layout_marginTop="16dp"
                 app:iconSize="@dimen/habitTimelineIconSize"
                 app:days="7"
-                app:textColor="@color/colorTextPrimary"
-                app:textSize="@dimen/smallTextSize"/>
+                app:textColor="@color/textPrimary"/>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
 
     </ScrollView>
 
-    <androidx.appcompat.widget.AppCompatButton
+
+    <!-- 🔹 Кнопка перегляду логів -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/viewTaskLogsButton"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/buttonHeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/view_task_logs"
-        style="@style/ButtonStyle"
-        android:layout_margin="@dimen/largeMargin"
+        android:textSize="18sp"
+        android:layout_margin="20dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:cornerRadius="12dp"
 
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
+        app:layout_constraintRight_toRightOf="parent"/>
     <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
@@ -131,7 +161,6 @@
         android:indeterminate="true"
         android:visibility="gone"
         style="?android:attr/progressBarStyleHorizontal"
-
         app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

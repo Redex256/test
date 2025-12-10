@@ -8,7 +8,20 @@
     <color name="toolbarBackground">#FAFAFA</color>
     <color name="textPrimary">#1A1A1A</color>
     <color name="gray">#8A8A8A</color>
+    <color name="textSecondary">#888888</color>
+    <color name="colorAccent">#4CAF50</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="colorError">#E53935</color>         <!-- Червоний -->
+    <color name="colorWarning">#FF9800</color>
+    <color name="colorIconInactive">#C0C0C8</color>
+    <color name="textPrimaryLight">#555555</color>
 
+
+
+
+
+    <color name="cardBackground">#FFFFFF</color> <!-- світла картка -->
+    <color name="elevationColor">#22000000</color>
 
 
     <color name="colorSecondary">#78909c</color>

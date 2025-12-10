@@ -3,7 +3,47 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
+
+    <!-- Горщик -->
     <path
         android:fillColor="#4CAF50"
-        android:pathData="M12,2C10.34,2 9,3.34 9,5C9,6.66 10.34,8 12,8C13.66,8 15,6.66 15,5C15,3.34 13.66,2 12,2zM12,10C9.33,10 4,11.34 4,14L4,16H20L20,14C20,11.34 14.67,10 12,10z"/>
+        android:pathData="
+            M7,14
+            L17,14
+            L16,20
+            C16,21.1 15.1,22 14,22
+            L10,22
+            C8.9,22 8,21.1 8,20
+            L7,14
+            Z" />
+
+    <!-- Стебло -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="
+            M12,14
+            L12,9" />
+
+    <!-- Листок лівий -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="
+            M12,9
+            C9,9 7,6.5 7,4.5
+            C7,3 8.3,2 9.8,2
+            C11.9,2 13,4.2 13,6
+            C13,7.5 12.6,8.7 12,9
+            Z" />
+
+    <!-- Листок правий -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="
+            M12,9
+            C15,9 17,6.5 17,4.5
+            C17,3 15.7,2 14.2,2
+            C12.1,2 11,4.2 11,6
+            C11,7.5 11.4,8.7 12,9
+            Z" />
+
 </vector>
